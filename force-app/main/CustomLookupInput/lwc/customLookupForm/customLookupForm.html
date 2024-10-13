@@ -1,0 +1,38 @@
+<!-- 
+    author: Diego
+    description: Input de lookup customizado em que a pessoa pode clicar para exibir mais resultados em um modal
+ -->
+<template>
+    <!-- Initial view -->
+    <div class="slds-box slds-theme_default">
+        <c-custom-lookup-input 
+            label={label}
+            objects-to-search={objectsToSearch} 
+            object-label-by-object-map={objectLabelByObjectMap} 
+            object-icon-by-object-map={objectIconByObjectMap} 
+            fields-to-search-by-object-map={fieldsToSearchByObjectMap} 
+            selected-result-sobj={selectedResultSOBJ}
+            search-results={searchResults}
+            oninputchange={handleInputChange}
+            onopenmodal={handleOpenModal} 
+            onchooseresult={handleChooseResult} 
+            onremoveselectedresult={handleRemoveSelectedResult}
+        ></c-custom-lookup-input>
+    </div>
+
+    <!-- Modal view -->
+    <template if:true={showModalOfResults}>
+        <c-custom-lookup-modal
+            search-term={searchTerm}
+            fields-to-search={fieldsToSearch}
+            selected-object={selectedObject}
+            selected-object-label={selectedObjectLabel}
+            selected-object-icon={selectedObjectIcon}
+            onclosemodal={handleCloseModal}
+            search-results={searchResults}
+            oninputchange={handleInputChange}
+            onchooseresult={handleChooseResult} 
+        ></c-custom-lookup-modal>
+    </template>
+
+</template>

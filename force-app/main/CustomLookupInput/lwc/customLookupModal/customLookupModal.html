@@ -1,0 +1,46 @@
+<template>
+    <!-- Searching modal -->
+
+    <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01" class="slds-modal slds-fade-in-open slds-modal_large">
+        <div class="slds-modal__container">
+            <label></label>
+            <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse close-icon" onclick={closeModal}>
+                <span class="slds-listbox__option-icon">
+                    <lightning-icon icon-name="utility:close" alternative-text=Remover size="x-small"></lightning-icon>
+                </span>
+                <span class="slds-assistive-text">Fechar</span>
+            </button>
+            
+            <div class="slds-modal__header">
+                <h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate">{modalTitle}</h1>
+            </div>
+            
+            <div class="slds-modal__content slds-var-p-around_medium" id="modal-content-id-1">
+                <c-custom-lookup-list-builder
+                    search-term={searchTerm}
+                    fields-to-search={fieldsToSearch}
+                    selected-object={selectedObject}
+                    selected-object-label={selectedObjectLabel}
+                    selected-object-icon={selectedObjectIcon}
+                    search-results={searchResults}
+                    oninputchange={handleInputChange}
+                    onchooseresult={handleChooseResult}
+                ></c-custom-lookup-list-builder>
+
+                <!-- No results illustration -->
+                <template lwc:if={noResults}>
+                    <div class="slds-box slds-var-m-vertical_medium">
+                        <div class="slds-var-m-vertical_xx-large">
+                            <c-custom-lookup-modal-no-results search-term={searchTerm} selected-object-label={selectedObjectLabel}></c-custom-lookup-modal-no-results>
+                        </div>
+                    </div>
+                </template>
+            </div>
+
+            <div class="slds-modal__footer">
+                <button class="slds-button slds-button_neutral" onclick={closeModal}>Cancelar</button>
+            </div>
+        </div>
+    </section>
+    <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+</template>

@@ -1,0 +1,20 @@
+.maxWidth
+{
+    max-width: none;
+    width: 100%;
+}
+.minWidth
+{
+    min-width: none;
+    width: fit-content;
+}
+.flex
+{
+    display: flex;
+}
+
+.itemDropdownSelectObject
+{
+    align-self: center;
+    margin-left: 10px;
+}

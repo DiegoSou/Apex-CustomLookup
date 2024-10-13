@@ -1,0 +1,56 @@
+<template>
+    <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right" role="none">
+        <label></label>
+        <input 
+            data-id="search-input-text"
+            type="text" 
+            value={searchTerm}
+            class="slds-input slds-combobox__input" 
+            placeholder={selectedObjectPlaceholder} 
+            oninput={searchResultInputChange}
+        />
+        <span class="slds-icon_container slds-icon-utility-search slds-input__icon slds-input__icon_right">
+            <lightning-icon icon-name="utility:search" alternative-text="Search" size="x-small"></lightning-icon>     
+        </span>
+    </div>
+
+    <div class="slds-scrollable slds-grow slds-var-m-top_small">
+        <div class="slds-scrollable_none">
+            <table class="slds-table slds-no-row-hover">
+                <thead><tr><th class="" scope="col" style="width:3.75rem; opacity: 0"></th></tr></thead>
+                <tbody>
+                    <!-- Results iteration, ordered by last viewed -->
+                    <template for:each={searchInputResults} for:item="item" for:index="index">
+                        <tr 
+                            aria-selected="false" 
+                            class="slds-hint-parent" 
+                            key={item.key} 
+                            data-id={item.key}
+                            style="border: 0.5px solid #d5d5d5; cursor: pointer;"
+                            onclick={chooseResult}
+                        >
+                            <td class="slds-text-align_right" role="gridcell" tabindex="0" style="white-space: break-spaces;">
+                                <label class="slds-checkbox-button">
+                                    <input type="checkbox" class="slds-assistive-text" tabindex="-1" />
+                                    <span class="slds-icon_container">
+                                        
+                                        <!-- Add icon -->
+                                        <!-- <svg  class="slds-icon slds-icon_x-small" xmlns="http://www.w3.org/2000/svg" height="52" width="52" viewBox="0 0 520 520" fill="#014486"><path d="M300 290h165c8 0 15-7 15-15v-30c0-8-7-15-15-15H300c-6 0-10-4-10-10V55c0-8-7-15-15-15h-30c-8 0-15 7-15 15v165c0 6-4 10-10 10H55c-8 0-15 7-15 15v30c0 8 7 15 15 15h165c6 0 10 4 10 10v165c0 8 7 15 15 15h30c8 0 15-7 15-15V300c0-6 4-10 10-10z"/></svg> -->
+                                        
+                                        <!-- Object icon -->
+                                        <lightning-icon icon-name={selectedObjectIcon} title={selectedObjectLabel}></lightning-icon>
+                                        
+                                        <span class="slds-assistive-text"></span>
+                                    </span>
+                                </label>
+                            </td>
+                            <th scope="row" style="white-space: break-spaces;">
+                                <div>{item.name}</div>
+                            </th>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</template>

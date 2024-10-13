@@ -1,0 +1,26 @@
+<aura:component controller="CustomLookupController" implements="flexipage:availableForAllPageTypes">
+    <aura:attribute name="results" type="List"/>
+    <aura:attribute name="hasResults" type="Boolean" default="false"/>
+    <aura:attribute name="resultsLimit" type="Integer" default="5"/>
+    <aura:attribute name="customLookupBuild" type="Object"/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <aura:if isTrue="{!v.hasResults}">
+        <c:customLookupForm 
+            label="{!v.customLookupBuild.label}"
+            objectsToSearch="{!v.customLookupBuild.objectsToSearch}"
+            objectLabelByObjectMap="{!v.customLookupBuild.objectLabelByObjectMap}"
+            objectIconByObjectMap="{!v.customLookupBuild.objectIconByObjectMap}"
+            fieldsToSearchByObjectMap="{!v.customLookupBuild.fieldsToSearchByObjectMap}"
+            searchResults="{!v.results}"
+            oninputchange="{!c.handleSearchChange}"
+            onchooseresult="{!c.handleChooseResult}" 
+            onopenmodal="{!c.expandLimit}"
+            onclosemodal="{!c.decreaseLimit}"
+        />
+        <aura:set attribute="else">
+            <span class="slds-text-color_weak">No results found.</span>
+        </aura:set>
+    </aura:if>
+</aura:component>
